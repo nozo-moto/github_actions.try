@@ -8,12 +8,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v1
 
-      - name: run dog
-        uses: docker://reviewdog/action-golangci-lint:v1
-        with: 
-          reporter: github-pr-review
-          github_token: ${{ secrets.github_token }}
-
       - name: Setup reviewdog
         run: |
           mkdir -p $HOME/bin && curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh| sh -s -- -b $HOME/bin
