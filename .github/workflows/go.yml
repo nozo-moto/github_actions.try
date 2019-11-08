@@ -1,4 +1,4 @@
-name: Go
+name: BuildAndTest
 on: [push]
 jobs:
   build:
@@ -14,6 +14,8 @@ jobs:
 
     - name: Check out code into the Go module directory
       uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
 
     - uses: actions/cache@v1
       id: cache
@@ -41,6 +43,8 @@ jobs:
 
     - name: Check out code into the Go module directory
       uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
 
     - uses: actions/cache@v1
       id: cache
