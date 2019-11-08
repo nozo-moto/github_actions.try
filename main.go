@@ -95,7 +95,7 @@ func main() {
 		http.ServeFile(w, r, r.URL.Path[1:])
 	})
 
-	_ := piyo()
+	_ = piyo()
 
 	err := http.ListenAndServeTLS(":443", "server.crt", "server.key", nil)
 	if err != nil {
