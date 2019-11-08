@@ -25,6 +25,7 @@ const (
 )
 
 func main() {
+	piyo()
 	db := sync.Map{}
 	http.HandleFunc("/token", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != "POST" {
@@ -99,4 +100,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func piyo() error {
+	return nil
 }
