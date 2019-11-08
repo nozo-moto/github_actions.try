@@ -19,7 +19,7 @@ jobs:
       id: cache
       with:
         path: $GOPATH/pkg/mod/cache
-        key: ${{ runner.os }}-${{ hashFiles('go.sum')}}
+        key: ${{ runner.os }}-${{ hashFiles('**/go.sum')}}
 
     - name: Install Dependencies
       if: steps.cache.outputs.cache-hit != 'true'
