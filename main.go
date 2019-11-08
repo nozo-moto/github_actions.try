@@ -28,7 +28,6 @@ func main() {
 	db := sync.Map{}
 	http.HandleFunc("/token", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != "POST" {
-			e
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
@@ -46,35 +45,14 @@ func main() {
 			return
 		}
 		pp.Print(resJSON)
-		token, ok := resJSON["token"].(string)
-		if !ok {
-			log.Println("res json token is not good")
-			w.WriteHeader(http.StatusBadRequest)
-			return
-		}
-
 		log.Println("res json")
 		pp.Print(resJSON)
 		log.Println("data ")
 		pp.Print(resJSON["data"])
 
-		d, ok := resJSON["data"].([]interface{})
+		_, ok := resJSON["data"].([]interface{})
 		if !ok {
 			log.Println("d json id is bad")
-			w.WriteHeader(http.StatusInternalServerError)
-			return
-		}
-
-		data, ok := d[0].(map[string]interface{})
-		if !ok {
-			log.Println("data json id is bad")
-			w.WriteHeader(http.StatusInternalServerError)
-			return
-		}
-
-		id, ok := data["id"].(string)
-		if !ok {
-			log.Println("res json id is bad")
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
@@ -86,36 +64,30 @@ func main() {
 
 	http.HandleFunc("/pay", func(w http.ResponseWriter, r *http.Request) {
 		query := r.URL.Query()
-		amount := query.Get("amount")
 		user := query.Get("user")
 
-		userInfo, ok := db.Load(user)
+		_, ok := db.Load(user)
 		if !ok {
 			w.WriteHeader(http.StatusBadRequest)
 			fmt.Fprintf(w, "user is not exist")
 			return
 		}
-		if err != nil {
-			log.Println(err)
-			w.WriteHeader(http.StatusInternalServerError)
-			return
-		}
-		pp.Print(resJSON)
-		d, ok := resJSON["data"].([]interface{})
-		if !ok {
-			log.Println("d json id is bad")
-			w.WriteHeader(http.StatusInternalServerError)
-			return
-		}
+		//pp.Print(resJSON)
+		//d, ok := resJSON["data"].([]interface{})
+		//if !ok {
+		//	log.Println("d json id is bad")
+		//	w.WriteHeader(http.StatusInternalServerError)
+		//	return
+		//}
 
-		data, ok := d[0].(map[string]interface{})
-		if !ok {
-			log.Println("data json id is bad")
-			w.WriteHeader(http.StatusInternalServerError)
-			return
-		}
+		// data, ok := d[0].(map[string]interface{})
+		// if !ok {
+		// 	log.Println("data json id is bad")
+		// 	w.WriteHeader(http.StatusInternalServerError)
+		// 	return
+		// }
 
-		fmt.Fprintf(w, "you paied %f", data["amount"])
+		// fmt.Fprintf(w, "you paied %f", data["amount"])
 		return
 	})
 
