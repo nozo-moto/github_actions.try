@@ -3,7 +3,7 @@ on: [pull_request]
 jobs:
   reviewdog:
     name: runner
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v1
