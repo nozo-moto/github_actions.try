@@ -1,6 +1,8 @@
 package main
 
-import "testing"
+import (
+	"testing"
+)
 
 func Test_hoge(t *testing.T) {
 	tests := []struct {
@@ -18,5 +20,12 @@ func Test_hoge(t *testing.T) {
 				t.Errorf("hoge() = %v, want %v", got, tt.want)
 			}
 		})
+	}
+}
+
+func Test_getUUID(t *testing.T) {
+	_, err := getUUID()
+	if err != nil {
+		t.Error(err)
 	}
 }
