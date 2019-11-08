@@ -25,7 +25,6 @@ const (
 )
 
 func main() {
-	piyo()
 	db := sync.Map{}
 	http.HandleFunc("/token", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != "POST" {
@@ -95,6 +94,8 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, r.URL.Path[1:])
 	})
+
+	_ := piyo()
 
 	err := http.ListenAndServeTLS(":443", "server.crt", "server.key", nil)
 	if err != nil {
